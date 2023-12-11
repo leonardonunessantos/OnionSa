@@ -1,25 +1,22 @@
-﻿using System.Threading.Tasks;
+﻿namespace OnionSa.Application.Services.Interfaces;
 
-namespace OnionSa.Application.Services.Interfaces
+public interface IViaCepService
 {
-    public interface IViaCepService
-    {
-        Task<ViaCepResponse> GetLocationByCepAsync(string cep);
-    }
+    Task<ViaCepResponse> GetLocationByCepAsync(string cep);
+}
 
-    public class ViaCepResponse
-    {
-        public string Cep { get; set; }
-        public string Logradouro { get; set; }
-        public string Complemento { get; set; }
-        public string Bairro { get; set; }
-        public string Localidade { get; set; }
-        public string Uf { get; set; }
-        public string Ibge { get; set; }
-        public string Gia { get; set; }
-        public string Ddd { get; set; }
-        public string Siafi { get; set; }
-        public string Regao { get; set; }
+public class ViaCepResponse
+{
+    public string Cep { get; set; }
+    public string Logradouro { get; set; }
+    public string Complemento { get; set; }
+    public string Bairro { get; set; }
+    public string Localidade { get; set; }
+    public string Uf { get; set; }
+    public string Ibge { get; set; }
+    public string Gia { get; set; }
+    public string Ddd { get; set; }
+    public string Siafi { get; set; }
+    public string Regao { get; set; }
 
-    }
 }

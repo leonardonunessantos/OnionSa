@@ -1,20 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using OnionSa.Core.Entities;
-using OnionSa.Infrastructure.Persistence;
 
-namespace OnionSa.Infrastructure.Persistence.Configurations
+namespace OnionSa.Infrastructure.Persistence.Configurations;
+
+public class ClientConfigurations : IEntityTypeConfiguration<Client>
 {
-    public class ClientConfigurations : IEntityTypeConfiguration<Client>
+    public void Configure(EntityTypeBuilder<Client> builder)
     {
-        public void Configure(EntityTypeBuilder<Client> builder)
-        {
-            builder
-                .HasKey(c => c.Document);
+        builder
+            .HasKey(c => c.Document);
 
-            builder
-                .HasMany(c => c.Orders)
-                .WithOne();
-        }
+        builder
+            .HasMany(c => c.Orders)
+            .WithOne();
     }
 }

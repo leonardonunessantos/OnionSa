@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace OnionSa.Core.Entities;
 
-namespace OnionSa.Core.Entities
-{
     public class Order : BaseEntity
     {
         public Order(int orderId, string clientDocument, string cep, string productName, DateTime createdAt, decimal totalCostFrete, int totalDaysFrete)
@@ -47,4 +40,3 @@ namespace OnionSa.Core.Entities
         }
     }
 
-}
