@@ -1,0 +1,17 @@
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\OnionSa.Infrastructure.csproj.AssemblyReference.cache
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\OnionSa.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\OnionSa.Infrastructure.AssemblyInfoInputs.cache
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\OnionSa.Infrastructure.AssemblyInfo.cs
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\OnionSa.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\bin\Debug\net6.0\OnionSa.Infrastructure.deps.json
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\bin\Debug\net6.0\OnionSa.Infrastructure.dll
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\bin\Debug\net6.0\OnionSa.Infrastructure.pdb
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\bin\Debug\net6.0\OnionSa.Core.dll
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\bin\Debug\net6.0\OnionSa.Core.pdb
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\OnionSa.Infrastructure.csproj.CopyComplete
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\OnionSa.Infrastructure.dll
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\refint\OnionSa.Infrastructure.dll
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\OnionSa.Infrastructure.pdb
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\ref\OnionSa.Infrastructure.dll
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\bin\Debug\net6.0\OnionSa.Infrastructure.runtimeconfig.json
+C:\Repositorios\OnionSa\OnionSa.Infrastructure\obj\Debug\net6.0\OnionSa.Infrastructure.genruntimeconfig.cache

@@ -1,0 +1,152 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Repositorios\\OnionSa\\OnionSa.Infrastructure\\OnionSa.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "C:\\Repositorios\\OnionSa\\OnionSa.Core\\OnionSa.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Repositorios\\OnionSa\\OnionSa.Core\\OnionSa.Core.csproj",
+        "projectName": "OnionSa.Core",
+        "projectPath": "C:\\Repositorios\\OnionSa\\OnionSa.Core\\OnionSa.Core.csproj",
+        "packagesPath": "C:\\Users\\leonardo.santos\\.nuget\\packages\\",
+        "outputPath": "C:\\Repositorios\\OnionSa\\OnionSa.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\leonardo.santos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://grupoltm.pkgs.visualstudio.com/_packaging/VertemPackages%40Local/nuget/v3/index.json": {},
+          "https://grupoltm.pkgs.visualstudio.com/e1a66725-8208-4dbd-b855-e2c1261003fb/_packaging/Vertem-Admin%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/grupoltm/ab756afb-73b8-4a78-b655-0cc258be6bf3/_packaging/Vertem.Core/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.14, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Repositorios\\OnionSa\\OnionSa.Infrastructure\\OnionSa.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Repositorios\\OnionSa\\OnionSa.Infrastructure\\OnionSa.Infrastructure.csproj",
+        "projectName": "OnionSa.Infrastructure",
+        "projectPath": "C:\\Repositorios\\OnionSa\\OnionSa.Infrastructure\\OnionSa.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\leonardo.santos\\.nuget\\packages\\",
+        "outputPath": "C:\\Repositorios\\OnionSa\\OnionSa.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\leonardo.santos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://grupoltm.pkgs.visualstudio.com/_packaging/VertemPackages%40Local/nuget/v3/index.json": {},
+          "https://grupoltm.pkgs.visualstudio.com/e1a66725-8208-4dbd-b855-e2c1261003fb/_packaging/Vertem-Admin%40Local/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/grupoltm/ab756afb-73b8-4a78-b655-0cc258be6bf3/_packaging/Vertem.Core/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Repositorios\\OnionSa\\OnionSa.Core\\OnionSa.Core.csproj": {
+                "projectPath": "C:\\Repositorios\\OnionSa\\OnionSa.Core\\OnionSa.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.14, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

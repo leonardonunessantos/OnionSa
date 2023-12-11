@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\OnionSa.Application",
+    "\\OnionSa.Application\\Services",
+    "\\OnionSa.Application\\Services\\Interfaces",
+    "\\OnionSa.Application\\ViewModels",
+    "\\OnionSa.Core",
+    "\\OnionSa.Core\\Entities",
+    "\\OnionSa.Infrastructure",
+    "\\OnionSa.Infrastructure\\Persistence",
+    "\\OnionSa.Infrastructure\\Persistence\\Configurations"
+  ],
+  "SelectedNode": "\\OnionSa.Infrastructure\\Persistence\\Configurations\\ProductConfigurations.cs",
+  "PreviewInSolutionExplorer": false
+}
