@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnionSa.Core\OnionSa.Core.csproj" />
     <ProjectReference Include="..\OnionSa.Infrastructure\OnionSa.Infrastructure.csproj" />
   </ItemGroup>
 

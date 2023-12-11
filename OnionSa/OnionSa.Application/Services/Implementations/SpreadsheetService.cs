@@ -1,10 +1,8 @@
-﻿using OnionSa.Application.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Http;
 using OfficeOpenXml;
-using Microsoft.AspNetCore.Http;
-using OnionSa.Core.Entities;
-using System.Globalization;
-using System.Text;
+using OnionSa.Application.Services.Interfaces;
 
+namespace OnionSa.Application.Services.Implementations;
 public class SpreadsheetService : ISpreadsheetService
 {
     public async Task<List<Dictionary<string, string>>> ProcessExcelFiles(ICollection<IFormFile> files)

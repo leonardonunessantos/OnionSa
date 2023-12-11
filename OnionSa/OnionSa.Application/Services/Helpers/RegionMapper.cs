@@ -1,9 +1,9 @@
-﻿namespace OnionSa.Application.Services.Helpers
-{
+﻿namespace OnionSa.Application.Services.Helpers;
 
-    public class RegionMapper
-    {
-        private readonly Dictionary<string, string> _stateToRegionMap = new Dictionary<string, string>
+
+public class RegionMapper
+{
+    private readonly Dictionary<string, string> _stateToRegionMap = new Dictionary<string, string>
     {
         {"AC", "Norte"},
         {"AL", "Nordeste"},
@@ -34,17 +34,15 @@
         {"TO", "Norte"}
     };
 
-        public string GetRegionByState(string stateCode)
+    public string GetRegionByState(string stateCode)
+    {
+        if (_stateToRegionMap.ContainsKey(stateCode))
         {
-            if (_stateToRegionMap.ContainsKey(stateCode))
-            {
-                return _stateToRegionMap[stateCode];
-            }
-            else
-            {
-                return "Não Encontrado";
-            }
+            return _stateToRegionMap[stateCode];
+        }
+        else
+        {
+            return "Não Encontrado";
         }
     }
-
 }
