@@ -12,6 +12,7 @@ var connectionString = builder.Configuration.GetConnectionString("OnionSaCs");
 builder.Services.AddDbContext<OnionSaDbContext>(options => options.UseInMemoryDatabase("OnionSa"));
 using var dbContext = builder.Services.BuildServiceProvider().GetRequiredService<OnionSaDbContext>();
 SeedData.Initialize(dbContext);
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -26,6 +27,15 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 
 
 var app = builder.Build();
+
+// Configuração da política CORS
+app.UseCors(builder =>
+{
+    builder
+        .WithOrigins("http://localhost:4200")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -7,6 +7,13 @@ public class SpreadsheetService : ISpreadsheetService
 {
     public async Task<List<Dictionary<string, string>>> ProcessExcelFiles(ICollection<IFormFile> files)
     {
+
+        bool isExcel = this.IsExcelFile(files);
+        if (!isExcel) 
+        {
+            throw new Exception("Arquivo com formato inválido");
+        }
+
         var expectedColumns = new List<string>
         {
             "Documento",
@@ -79,6 +86,35 @@ public class SpreadsheetService : ISpreadsheetService
             }
         }
         return dataAsList;
+    }
+
+    private bool IsExcelFile(ICollection<IFormFile> files)
+    {
+        List<bool> isExcel = new List<bool>();
+        foreach (var file in files)
+        {
+            string extension = Path.GetExtension(file.FileName);
+            if (!string.IsNullOrEmpty(extension) &&
+               (extension.Equals(".xlsx", StringComparison.OrdinalIgnoreCase) ||
+                extension.Equals(".xls", StringComparison.OrdinalIgnoreCase) ||
+                extension.Equals(".csv", StringComparison.OrdinalIgnoreCase)))
+            {
+                isExcel.Add(true);
+            } else
+            {
+                isExcel.Add(false);
+            }
+        }
+        int countTrue = isExcel.Count(x => x);
+
+        if (countTrue == isExcel.Count)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 

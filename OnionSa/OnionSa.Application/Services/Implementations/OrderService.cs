@@ -27,20 +27,33 @@ public class OrderService : IOrderService
         _dbContext = dbContext;
         _connectionString = configuration.GetConnectionString("OnionSaCs");
     }
-    public bool Create(NewOrderInputModel inputModel)
+    public bool CreateAll(List<Dictionary<string, string>> listInputModel)
     {
         try
         {
-            int totalDaysFrete = EstimateDeliveryTime(inputModel.Cep).Result;
-            decimal totalFreteCost = CalculateFreteCost(inputModel.Cep, inputModel.ProductName).Result;
-            var order = new Order(inputModel.OrderId, inputModel.DocumentClient, inputModel.Cep, inputModel.ProductName, inputModel.CreatedAt, totalFreteCost, totalDaysFrete);
-            var client = _dbContext.Clients.FirstOrDefault(c => c.Document == inputModel.DocumentClient);
-            var product = _dbContext.Products.FirstOrDefault(p => p.Name == inputModel.ProductName);
-            //client.setOrder(order);
-            order.SetClient(client);
-            order.SetProduct(product);
-            _dbContext.Orders.Add(order);
-            _dbContext.SaveChanges();
+            var listOrdersExcel = CreateList(listInputModel);
+            var listOrderSuccess = new List<int>();
+            foreach (var item in listOrdersExcel)
+            {
+                var existingOrder = _dbContext.Orders.FirstOrDefault(o => o.OrderId == item.OrderId);
+                if (existingOrder == null)
+                {
+                    int totalDaysFrete = EstimateDeliveryTime(item.Cep).Result;
+                    decimal totalFreteCost = CalculateFreteCost(item.Cep, item.ProductName).Result;
+                    var order = new Order(item.OrderId, item.DocumentClient, item.Cep, item.ProductName, item.CreatedAt, totalFreteCost, totalDaysFrete);
+                    var client = _dbContext.Clients.FirstOrDefault(c => c.Document == item.DocumentClient);
+                    var product = _dbContext.Products.FirstOrDefault(p => p.Name == item.ProductName);
+                    order.SetClient(client);
+                    order.SetProduct(product);
+                    _dbContext.Orders.Add(order);
+                    _dbContext.SaveChanges();
+                }
+            }
+            if (listOrderSuccess.Count == 0)
+            {
+                // Futuramente salvar os Logs em uma tabela de logs ou ferramentas de Log como DataDog/GrayLog
+                throw new Exception("Todos os pedidos enviados ja foram cadastrados anteriormente.");
+            }
             return true;
         }
         catch (Exception e)
@@ -51,9 +64,6 @@ public class OrderService : IOrderService
     }
     public List<OrderViewModel> GetAll()
     {
-        var orderCount = _dbContext.Orders.Count();
-        var clientCount = _dbContext.Clients.Count();
-        var productCount = _dbContext.Products.Count();
         var orders = _dbContext.Orders
             .Include(o => o.Client)
             .Include(o => o.Product)
@@ -84,25 +94,10 @@ public class OrderService : IOrderService
     public async Task<int> EstimateDeliveryTime(string cep)
     {
         ViaCepResponse viaCepResponse = await _viaCepService.GetLocationByCepAsync(cep);
-        //Dictionary<string, string> viaCepResponse = new Dictionary<string, string>;
-        //{
-        //{"cep", "03656-000"},
-        //{"logradouro", "Rua Guaranésia"},
-        //{"complemento", ""},
-        //{"bairro", "Vila Ré"},
-        //{"localidade", "São Paulo"},
-        //{"uf", "SP"},
-        //{"ibge", "3550308"},
-        //{"gia", "1004"},
-        //{"ddd", "11"},
-        //{"siafi", "7107"}
-        //};
         if (viaCepResponse != null)
         {
             string region = _regionMapper.GetRegionByState(viaCepResponse.Uf);
             return CalculateDeliveryTime(viaCepResponse.Uf, viaCepResponse.Localidade, region);
-            //string region = _regionMapper.GetRegionByState(viaCepResponse["uf"]);
-            //return CalculateDeliveryTime(viaCepResponse["uf"], viaCepResponse["Localidade"], region);
         }
         else
         {

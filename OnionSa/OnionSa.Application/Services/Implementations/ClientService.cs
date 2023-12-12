@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using OnionSa.Application.InputModels;
 using OnionSa.Application.Services.Interfaces;
+using OnionSa.Application.ViewModels;
 using OnionSa.Core.Entities;
 
 namespace OnionSa.Application.Services.Implementations;
@@ -15,23 +17,25 @@ public class ClientService : IClientService
         _dbContext = dbContext;
         _connectionString = configuration.GetConnectionString("OnionSaCs");
     }
-    public bool Create(NewClientInputModel inputModel)
+    public bool CreateAll(List<Dictionary<string, string>> listInputModel)
     {
         try
         {
-            var existingClient = _dbContext.Clients.FirstOrDefault(c => c.Document == inputModel.Document);
+            var listClients = CreateList(listInputModel);
 
-            if (existingClient == null)
+            foreach (var item in listClients)
             {
-                var client = new Client(inputModel.Document, inputModel.Name, inputModel.Cep);
-                _dbContext.Clients.Add(client);
-                _dbContext.SaveChanges();
-                return true;
+                var existingClient = _dbContext.Clients.FirstOrDefault(c => c.Document == item.Document);
+
+                if (existingClient == null)
+                {
+                    var client = new Client(item.Document, item.Name, item.Cep);
+                    _dbContext.Clients.Add(client);
+                    _dbContext.SaveChanges();
+                }
             }
-            else
-            {
-                return false;
-            }
+            return true;
+
         }
         catch (Exception e)
         {

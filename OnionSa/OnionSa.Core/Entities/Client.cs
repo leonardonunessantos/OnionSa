@@ -15,11 +15,4 @@ public class Client : BaseEntity
     public string Cep { get; private set; }
     public List<Order> Orders { get; private set; }
 
-    //public void setOrder (Order order)
-    //{
-    //    if (order != null)
-    //    {
-    //        Orders.Add (order);
-    //    }
-    //}
 }
