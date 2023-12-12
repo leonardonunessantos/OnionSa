@@ -4,7 +4,7 @@ using OnionSa.Application.Services.Interfaces;
 
 namespace OnionSa.API.Controllers;
 
-[Route("api/pedidos")]
+[Route("api/orders")]
 public class OrdersController : ControllerBase
 {
     private readonly ISpreadsheetService _spreadsheetService;
@@ -21,50 +21,46 @@ public class OrdersController : ControllerBase
         _clientService = clientService;
     }
 
-    [HttpPost("upload")]
-    public async Task<ActionResult> Upload([FromForm] ICollection<IFormFile> files)
+    [HttpPost]
+    public async Task<ActionResult> Upload([FromForm] ICollection<IFormFile> file)
     {
-        if (files == null || files.Count == 0)
+         if (file == null || file.Count == 0)
         {
             return BadRequest("Arquivo vazio");
         }
         try
         {
-            var dataAsList = await _spreadsheetService.ProcessExcelFiles(files);
+            var dataAsList = await _spreadsheetService.ProcessExcelFiles(file);
+            
+            var createClients = _clientService.CreateAll(dataAsList);
 
-            var listClients = _clientService.CreateList(dataAsList);
-            List<string> listErrosClients = new List<string>();
-            foreach (var client in listClients)
-            {
-                bool created = _clientService.Create(client);
-                if (created == false)
-                {
-                    listErrosClients.Add(client.Document);
-                }
-            }
-
-            var listOrders = _orderService.CreateList(dataAsList);
-            List<int> listErrosOrders = new List<int>();
-            foreach (var order in listOrders)
-            {
-                bool created = _orderService.Create(order);
-                if (created == false)
-                {
-                    listErrosOrders.Add(order.OrderId);
-                }
-            }
+            var createOrders = _orderService.CreateAll(dataAsList);
 
             var orders = _orderService.GetAll();
 
-            return Ok(orders);
+            return Ok(true);
         }
-        catch (InvalidOperationException ex) // Pega o erro da formatação do excel
+        catch (InvalidOperationException ex)
         {
             return BadRequest(new { error = ex.Message });
         }
         catch (Exception ex)
         {
             return StatusCode(500, $"Erro ao processar o arquivo: {ex.Message}");
+        }
+    }
+
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        try
+        {
+            var orders = _orderService.GetAll();
+            return Ok(orders);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Erro ao processar a solicitação: {ex.Message}");
         }
     }
 }
