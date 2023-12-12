@@ -36,8 +36,6 @@ public class OrdersController : ControllerBase
 
             var createOrders = _orderService.CreateAll(dataAsList);
 
-            var orders = _orderService.GetAll();
-
             return Ok(true);
         }
         catch (InvalidOperationException ex)
