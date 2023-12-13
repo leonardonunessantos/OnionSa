@@ -1,8 +1,10 @@
-﻿namespace OnionSa.Application.ViewModels;
+﻿using System.Drawing;
+
+namespace OnionSa.Application.ViewModels;
 
 public class OrderViewModel
 {
-    public OrderViewModel(int orderId, string clientName, string clientCep, string productName, decimal productValue, decimal totalCostFrete, int totalDaysFrete, DateTime createdAt)
+    public OrderViewModel(int orderId, string clientName, string clientCep, string productName, decimal productValue, decimal totalCostFrete, int totalDaysFrete, DateTime createdAt, string region)
     {
         OrderId = orderId;
         ClientName = clientName;
@@ -12,6 +14,8 @@ public class OrderViewModel
         TotalCostFrete = totalCostFrete;
         TotalDaysFrete = totalDaysFrete;
         CreatedAt = createdAt;
+        Region = region;
+        Region = region;
     }
 
     public int OrderId { get; set; }
@@ -22,4 +26,5 @@ public class OrderViewModel
     public decimal TotalCostFrete { get; set; }
     public int TotalDaysFrete { get; set; }
     public DateTime CreatedAt { get; set; }
+    public string Region { get; set; }
 }

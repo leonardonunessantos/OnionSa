@@ -38,9 +38,10 @@ public class OrderService : IOrderService
                 var existingOrder = _dbContext.Orders.FirstOrDefault(o => o.OrderId == item.OrderId);
                 if (existingOrder == null)
                 {
-                    int totalDaysFrete = EstimateDeliveryTime(item.Cep).Result;
-                    decimal totalFreteCost = CalculateFreteCost(item.Cep, item.ProductName).Result;
-                    var order = new Order(item.OrderId, item.DocumentClient, item.Cep, item.ProductName, item.CreatedAt, totalFreteCost, totalDaysFrete);
+                    string region = GetRegion(item.Cep).Result;
+                    int totalDaysFrete = EstimateDeliveryTime(item.Cep, region).Result;
+                    decimal totalFreteCost = CalculateFreteCost(item.Cep, item.ProductName, region).Result;
+                    var order = new Order(item.OrderId, item.DocumentClient, item.Cep, item.ProductName, item.CreatedAt, totalFreteCost, totalDaysFrete, region);
                     var client = _dbContext.Clients.FirstOrDefault(c => c.Document == item.DocumentClient);
                     var product = _dbContext.Products.FirstOrDefault(p => p.Name == item.ProductName);
                     order.SetClient(client);
@@ -69,7 +70,7 @@ public class OrderService : IOrderService
             .Include(o => o.Product)
             .ToList();
         var ordersViewModel = orders
-            .Select(o => new OrderViewModel(o.OrderId, o.Client.Name, o.Client.Cep, o.ProductName, o.Product.Value, o.TotalCostFrete, o.TotalDaysFrete, o.CreatedAt))
+            .Select(o => new OrderViewModel(o.OrderId, o.Client.Name, o.Client.Cep, o.ProductName, o.Product.Value, o.TotalCostFrete, o.TotalDaysFrete, o.CreatedAt, o.Region))
             .ToList();
         return ordersViewModel;
     }
@@ -91,12 +92,11 @@ public class OrderService : IOrderService
         return orders;
     }
 
-    public async Task<int> EstimateDeliveryTime(string cep)
+    public async Task<int> EstimateDeliveryTime(string cep, string region)
     {
         ViaCepResponse viaCepResponse = await _viaCepService.GetLocationByCepAsync(cep);
         if (viaCepResponse != null)
         {
-            string region = _regionMapper.GetRegionByState(viaCepResponse.Uf);
             return CalculateDeliveryTime(viaCepResponse.Uf, viaCepResponse.Localidade, region);
         }
         else
@@ -105,12 +105,11 @@ public class OrderService : IOrderService
         }
     }
 
-    public async Task<decimal> CalculateFreteCost(string cep, string product)
+    public async Task<decimal> CalculateFreteCost(string cep, string product, string region)
     {
         ViaCepResponse viaCepResponse = await _viaCepService.GetLocationByCepAsync(cep);
         if (viaCepResponse != null)
         {
-            string region = _regionMapper.GetRegionByState(viaCepResponse.Uf);
             return CalculateShippingCost(viaCepResponse.Uf, viaCepResponse.Localidade, region, product);
         }
         else
@@ -188,6 +187,20 @@ public class OrderService : IOrderService
                     return -1;
             }
             return totalCost;
+        }
+    }
+
+    public async Task<string> GetRegion(string cep)
+    {
+        ViaCepResponse viaCepResponse = await _viaCepService.GetLocationByCepAsync(cep);
+        if (viaCepResponse != null)
+        {
+            string region = _regionMapper.GetRegionByState(viaCepResponse.Uf);
+            return region;
+        } 
+        else
+        {
+            throw new Exception();
         }
     }
 }

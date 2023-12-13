@@ -2,7 +2,7 @@
 
     public class Order : BaseEntity
     {
-        public Order(int orderId, string clientDocument, string cep, string productName, DateTime createdAt, decimal totalCostFrete, int totalDaysFrete)
+        public Order(int orderId, string clientDocument, string cep, string productName, DateTime createdAt, decimal totalCostFrete, int totalDaysFrete, string region)
         {
             OrderId = orderId;
             ClientDocument = clientDocument;
@@ -11,6 +11,7 @@
             CreatedAt = createdAt;
             TotalCostFrete = totalCostFrete;
             TotalDaysFrete = totalDaysFrete;
+            Region = region;
         }
 
         public int Id { get; private set; }
@@ -19,6 +20,7 @@
         public string ClientDocument { get; private set; }
         public Client Client { get; private set; }
         public string ProductName { get; private set; }
+        public string Region { get; private set; }
         public Product Product { get; private set; }
         public decimal TotalCostFrete { get; private set; }
         public int TotalDaysFrete { get; private set; }
